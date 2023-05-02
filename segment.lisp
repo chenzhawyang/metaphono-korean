@@ -9,6 +9,18 @@
   place
   manner)
 
+(defun consonant->alist (consonant)
+  `((voice . ,(consonant-voice consonant))
+    (place . ,(consonant-place consonant))
+    (manner . ,(consonant-manner consonant))))
+
+(defun alist->consonant (alist)
+  (flet ((assoc-get (sym) (cdr (assoc sym alist))))
+    (make-consonant
+     :voice (assoc-get 'voice)
+     :place (assoc-get 'place)
+     :manner (assoc-get 'manner))))
+
 (defvar korean-consonants 
   '((/p . '(:lax :bilabial :stop))
     (/ph . '(:aspirated :bilabial :stop))
@@ -71,6 +83,18 @@
   height
   centrality
   roundedness)
+
+(defun vowel->alist (vowel)
+  `((height . ,(vowel-height vowel))
+    (centrality . ,(vowel-centrality vowel))
+    (roundedness . ,(vowel-roundedness vowel))))
+
+(defun alist->vowel (alist)
+  (flet ((assoc-get (sym) (cdr (assoc sym alist))))
+    (make-vowel
+     :height (assoc-get 'height)
+     :centrality (assoc-get 'centrality)
+     :roundedness (assoc-get 'roundedness))))
 
 (defvar korean-monophthongs
   '((/a . '(:low :central :unrounded))    
@@ -169,3 +193,6 @@
     (let ((polyphthong&string-assoc-lst
             (mapcar #'transpose string&polyphthong-assoc-lst)))
       (cdr (assoc polyphthong polyphthong&string-assoc-lst :test #'equalp)))))
+
+;;
+

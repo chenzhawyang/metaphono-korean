@@ -10,6 +10,12 @@
   (nucleus nil :type list)
   (coda nil :type list)
   accent)
+
+(defun syllable->alist (syllable)
+  nil)
+
+(defun alist->syllable (alist)
+  nil)
  
 ;;
 
